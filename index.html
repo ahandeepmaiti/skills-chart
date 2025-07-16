@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Animated Skill Charts</title>
+  <style>
+    body { font-family: 'Poppins', sans-serif; margin:0; padding:20px; background:#f9f9f9; }
+    .charts-container { display:flex; flex-wrap:wrap; justify-content:center; gap:40px;}
+    .chart-box { width:280px; text-align:center; }
+    canvas { max-width:100%; height:auto; }
+    .legend { margin-top:10px; text-align:left; font-size:14px; line-height:1.4;}
+    .legend div { margin:4px 0; }
+    .legend span { display:inline-block; width:14px; height:14px; border-radius:50%; margin-right:8px;}
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="charts-container">
+    <!-- Chart 1 -->
+    <div class="chart-box">
+      <canvas id="cyberChart"></canvas>
+      <div class="legend">
+        <div><span style="background:#f94144"></span>SOC</div>
+        <div><span style="background:#f3722c"></span>Monitoring & Response</div>
+        <div><span style="background:#f9c74f"></span>Threat Intelligence</div>
+        <div><span style="background:#f9844a"></span>VAPT</div>
+        <div><span style="background:#90be6d"></span>Network Security</div>
+        <div><span style="background:#577590"></span>Endpoint/ ZTNA</div>
+      </div>
+    </div>
+    <!-- Chart 2 -->
+    <div class="chart-box">
+      <canvas id="toolChart"></canvas>
+      <div class="legend">
+        <div><span style="background:#43aa8b"></span>SIEM Tools</div>
+        <div><span style="background:#4d908e"></span>Firewalls</div>
+        <div><span style="background:#577590"></span>IDS/IPS</div>
+        <div><span style="background:#277da1"></span>NGFW</div>
+        <div><span style="background:#6a4c93"></span>AD & Group Policy</div>
+        <div><span style="background:#8338ec"></span>Kali/Burp etc.</div>
+        <div><span style="background:#3a0ca3"></span>Win/Linux Servers</div>
+        <div><span style="background:#7209b7"></span>VPN/Proxy</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const commonOptions = {
+      type: 'doughnut',
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '70%',
+        animation: { animateScale: true }
+      }
+    };
+
+    new Chart(document.getElementById('cyberChart'), {
+      ...commonOptions,
+      data: {
+        labels: ['SOC','Monitoring','Threat','VAPT','Network','Endpoint'],
+        datasets: [{
+          data: [95,94,96,93,97,92],
+          backgroundColor: ['#f94144','#f3722c','#f9c74f','#f9844a','#90be6d','#577590']
+        }]
+      }
+    });
+
+    new Chart(document.getElementById('toolChart'), {
+      ...commonOptions,
+      data: {
+        labels: ['SIEM','Firewalls','IDS/IPS','NGFW','AD','Kali','Servers','VPN'],
+        datasets: [{
+          data: [96,93,95,92,94,93,96,95],
+          backgroundColor: ['#43aa8b','#4d908e','#577590','#277da1','#6a4c93','#8338ec','#3a0ca3','#7209b7']
+        }]
+      }
+    });
+  </script>
+</body>
+</html>
